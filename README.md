@@ -18,11 +18,26 @@
 bash <(curl -Ls https://raw.githubusercontent.com/charmtv/s-ui/main/install.sh)
 ```
 
+也可以使用 Cloudflare 域名：
+
+```bash
+bash <(curl -Ls https://sui.813099.xyz/install.sh)
+```
+
+域名命令由 Cloudflare Worker 提供，并实时读取本仓库 `main` 分支中的安装脚本。GitHub 原始命令继续保留，两种方式功能相同。
+
 安装指定版本：
 
 ```bash
 VERSION=1.5.3
 bash <(curl -Ls https://raw.githubusercontent.com/charmtv/s-ui/main/install.sh) "$VERSION"
+```
+
+域名方式安装指定版本：
+
+```bash
+VERSION=1.5.3
+bash <(curl -Ls https://sui.813099.xyz/install.sh) "$VERSION"
 ```
 
 安装完成后运行管理菜单：
@@ -40,6 +55,13 @@ s-ui restart
 s-ui status
 s-ui log
 s-ui update
+```
+
+只更新中文管理脚本：
+
+```bash
+curl -fLs https://sui.813099.xyz/s-ui.sh -o /usr/bin/s-ui
+chmod +x /usr/bin/s-ui
 ```
 
 ## 默认配置

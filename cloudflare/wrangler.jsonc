@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "charmtv-sui-installer",
+  "main": "worker.js",
+  "compatibility_date": "2026-07-14",
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "routes": [
+    {
+      "pattern": "sui.813099.xyz",
+      "custom_domain": true
+    }
+  ]
+}
