@@ -1,268 +1,102 @@
-# S-UI
-**An Advanced Web Panel • Built on SagerNet/Sing-Box**
+# S-UI 简体中文版
 
-![](https://img.shields.io/github/v/release/alireza0/s-ui.svg)
-![S-UI Docker pull](https://img.shields.io/docker/pulls/alireza7/s-ui.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/alireza0/s-ui)](https://goreportcard.com/report/github.com/alireza0/s-ui)
-[![Downloads](https://img.shields.io/github/downloads/alireza0/s-ui/total.svg)](https://img.shields.io/github/downloads/alireza0/s-ui/total.svg)
-[![License](https://img.shields.io/badge/license-GPL%20V3-blue.svg?longCache=true)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+基于 [alireza0/s-ui](https://github.com/alireza0/s-ui) 的简体中文定制版。
 
-> **Disclaimer:** This project is only for personal learning and communication, please do not use it for illegal purposes, please do not use it in a production environment
+- 项目仓库：`https://github.com/charmtv/s-ui`
+- 当前版本：`1.5.3`
+- 上游同步：`2be943e5d8e298120eeaad0f4bc1e339a7b67d9c`
+- 界面语言：固定为简体中文
+- 前端源码：已合并到主仓库，不再使用 Git 子模块
 
-**If you think this project is helpful to you, you may wish to give a**:star2:
+> 本项目仅供学习与交流，请遵守所在地区法律法规。
 
-**Want to contribute?** See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, coding conventions, testing, and the pull request process.
+## 一键安装
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/alireza7)
+使用 root 用户执行：
 
-<a href="https://nowpayments.io/donation/alireza7" target="_blank" rel="noreferrer noopener">
-   <img src="https://nowpayments.io/images/embeds/donation-button-white.svg" alt="Crypto donation button by NOWPayments">
-</a>
-
-## Quick Overview
-| Features                               |      Enable?       |
-| -------------------------------------- | :----------------: |
-| Multi-Protocol                         | :heavy_check_mark: |
-| Multi-Language                         | :heavy_check_mark: |
-| Multi-Client/Inbound                   | :heavy_check_mark: |
-| Advanced Traffic Routing Interface     | :heavy_check_mark: |
-| Client & Traffic & System Status       | :heavy_check_mark: |
-| Subscription Link (link/json/clash + info)| :heavy_check_mark: |
-| Dark/Light Theme                       | :heavy_check_mark: |
-| API Interface                          | :heavy_check_mark: |
-
-## Supported Platforms
-| Platform | Architecture | Status |
-|----------|--------------|---------|
-| Linux    | amd64, arm64, armv7, armv6, armv5, 386, s390x | ✅ Supported |
-| Windows  | amd64, 386, arm64 | ✅ Supported |
-| macOS    | amd64, arm64 | 🚧 Experimental |
-
-## Screenshots
-
-!["Main"](https://github.com/alireza0/s-ui-frontend/raw/main/media/main.png)
-
-[Other UI Screenshots](https://github.com/alireza0/s-ui-frontend/blob/main/screenshots.md)
-
-## API Documentation
-
-[API-Documentation Wiki](https://github.com/alireza0/s-ui/wiki/API-Documentation)
-
-## Default Installation Information
-- Panel Port: 2095
-- Panel Path: /app/
-- Subscription Port: 2096
-- Subscription Path: /sub/
-- User/Password: admin
-
-## Install & Upgrade to Latest Version
-
-### Linux/macOS
-```sh
-bash <(curl -Ls https://raw.githubusercontent.com/alireza0/s-ui/master/install.sh)
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/charmtv/s-ui/main/install.sh)
 ```
 
-### Windows
-1. Download the latest Windows release from [GitHub Releases](https://github.com/alireza0/s-ui/releases/latest)
-2. Extract the ZIP file
-3. Run `install-windows.bat` as Administrator
-4. Follow the installation wizard
+安装指定版本：
 
-## Install legacy Version
-
-**Step 1:** To install your desired legacy version, add the version to the end of the installation command. e.g., ver `1.0.0`:
-
-```sh
-VERSION=1.0.0 && bash <(curl -Ls https://raw.githubusercontent.com/alireza0/s-ui/$VERSION/install.sh) $VERSION
+```bash
+VERSION=1.5.3
+bash <(curl -Ls https://raw.githubusercontent.com/charmtv/s-ui/main/install.sh) "$VERSION"
 ```
 
-## Manual installation
+安装完成后运行管理菜单：
 
-### Linux/macOS
-1. Get the latest version of S-UI based on your OS/Architecture from GitHub: [https://github.com/alireza0/s-ui/releases/latest](https://github.com/alireza0/s-ui/releases/latest)
-2. **OPTIONAL** Get the latest version of `s-ui.sh` [https://raw.githubusercontent.com/alireza0/s-ui/master/s-ui.sh](https://raw.githubusercontent.com/alireza0/s-ui/master/s-ui.sh)
-3. **OPTIONAL** Copy `s-ui.sh` to /usr/bin/ and run `chmod +x /usr/bin/s-ui`.
-4. Extract s-ui tar.gz file to a directory of your choice and navigate to the directory where you extracted the tar.gz file.
-5. Copy *.service files to /etc/systemd/system/ and run `systemctl daemon-reload`.
-6. Enable autostart and start S-UI service using `systemctl enable s-ui --now`
-7. Start sing-box service using `systemctl enable sing-box --now`
-
-### Windows
-1. Get the latest Windows version from GitHub: [https://github.com/alireza0/s-ui/releases/latest](https://github.com/alireza0/s-ui/releases/latest)
-2. Download the appropriate Windows package (e.g., `s-ui-windows-amd64.zip`)
-3. Extract the ZIP file to a directory of your choice
-4. Run `install-windows.bat` as Administrator
-5. Follow the installation wizard
-6. Access the panel at http://localhost:2095/app
-
-## Uninstall S-UI
-
-```sh
-sudo -i
-
-systemctl disable s-ui  --now
-
-rm -f /etc/systemd/system/sing-box.service
-systemctl daemon-reload
-
-rm -fr /usr/local/s-ui
-rm /usr/bin/s-ui
+```bash
+s-ui
 ```
 
-## Install using Docker
+常用命令：
 
-<details>
-   <summary>Click for details</summary>
-
-### Usage
-
-**Step 1:** Install Docker
-
-```shell
-curl -fsSL https://get.docker.com | sh
+```bash
+s-ui start
+s-ui stop
+s-ui restart
+s-ui status
+s-ui log
+s-ui update
 ```
 
-**Step 2:** Install S-UI
+## 默认配置
 
-> Docker compose method
+| 项目 | 默认值 |
+| --- | --- |
+| 面板端口 | `2095` |
+| 面板路径 | `/app/` |
+| 订阅端口 | `2096` |
+| 订阅路径 | `/sub/` |
+| 默认账号 | `admin` |
 
-```shell
-mkdir s-ui && cd s-ui
-wget -q https://raw.githubusercontent.com/alireza0/s-ui/master/docker-compose.yml
+建议安装后立即修改账号、密码、端口和访问路径。
+
+## Docker
+
+```bash
 docker compose up -d
 ```
 
-> Use docker
+默认镜像：
 
-```shell
-mkdir s-ui && cd s-ui
-docker run -itd \
-    -p 2095:2095 -p 2096:2096 -p 443:443 -p 80:80 \
-    -v $PWD/db/:/app/db/ \
-    -v $PWD/cert/:/root/cert/ \
-    --name s-ui --restart=unless-stopped \
-    alireza7/s-ui:latest
+```text
+ghcr.io/charmtv/s-ui:latest
 ```
 
-> Build your own image
+## 本地开发
 
-```shell
-git clone https://github.com/alireza0/s-ui
-git submodule update --init --recursive
-docker build -t s-ui .
-```
+环境要求：Go、Node.js、npm。
 
-</details>
-
-## Manual run ( contribution )
-
-<details>
-   <summary>Click for details</summary>
-
-### Build and run whole project
-```shell
+```bash
+git clone https://github.com/charmtv/s-ui.git
+cd s-ui
 ./runSUI.sh
 ```
 
-### Clone the repository
-```shell
-# clone repository
-git clone https://github.com/alireza0/s-ui
-# clone submodules
-git submodule update --init --recursive
-```
-
-
-### - Frontend
-
-Visit [s-ui-frontend](https://github.com/alireza0/s-ui-frontend) for frontend code
-
-### - Backend
-> Please build frontend once before!
-
-To build backend:
-```shell
-# remove old frontend compiled files
-rm -fr web/html/*
-# apply new frontend compiled files
-cp -R frontend/dist/ web/html/
-# build
-go build -o sui main.go
-```
-
-To run backend (from root folder of repository):
-```shell
-./sui
-```
-
-</details>
-
-## Languages
-
-- English
-- Farsi
-- Vietnamese
-- Chinese (Simplified)
-- Chinese (Traditional)
-- Russian
-
-## Features
-
-- Supported protocols:
-  - General:  Mixed, SOCKS, HTTP, HTTPS, Direct, Redirect, TProxy
-  - V2Ray based: VLESS, VMess, Trojan, Shadowsocks
-  - Other protocols: ShadowTLS, Hysteria, Hysteria2, Naive, TUIC
-- Supports XTLS protocols
-- An advanced interface for routing traffic, incorporating PROXY Protocol, External, and Transparent Proxy, SSL Certificate, and Port
-- An advanced interface for inbound and outbound configuration
-- Clients’ traffic cap and expiration date
-- Displays online clients, inbounds and outbounds with traffic statistics, and system status monitoring
-- Subscription service with ability to add external links and subscription
-- HTTPS for secure access to the web panel and subscription service (self-provided domain + SSL certificate)
-- Dark/Light theme
-
-## Environment Variables
-
-<details>
-  <summary>Click for details</summary>
-
-### Usage
-
-| Variable       |                      Type                      | Default       |
-| -------------- | :--------------------------------------------: | :------------ |
-| SUI_LOG_LEVEL  | `"debug"` \| `"info"` \| `"warn"` \| `"error"` | `"info"`      |
-| SUI_DEBUG      |                   `boolean`                    | `false`       |
-| SUI_BIN_FOLDER |                    `string`                    | `"bin"`       |
-| SUI_DB_FOLDER  |                    `string`                    | `"db"`        |
-| SINGBOX_API    |                    `string`                    | -             |
-
-</details>
-
-## SSL Certificate
-
-<details>
-  <summary>Click for details</summary>
-
-### Certbot
+单独构建前端：
 
 ```bash
-snap install core; snap refresh core
-snap install --classic certbot
-ln -s /snap/bin/certbot /usr/bin/certbot
-
-certbot certonly --standalone --register-unsafely-without-email --non-interactive --agree-tos -d <Your Domain Name>
+cd frontend
+npm install
+npm run build
 ```
 
-</details>
+后端检查：
 
-## Third-party Projects
+```bash
+go test ./...
+go build ./...
+```
 
-Community-made projects built around S-UI. These are not affiliated with or maintained by S-UI — use them at your own discretion:
+## 发布说明
 
-- [itning/reset-s-ui-traffic](https://github.com/itning/reset-s-ui-traffic) — periodic traffic reset for all users
-- [zqh2333/s-ui-traffic-reset](https://github.com/zqh2333/s-ui-traffic-reset) — traffic reset tool
+一键安装优先下载 `charmtv/s-ui` 的 Release。仓库尚未发布二进制时，会临时回退到上游发布包。
 
-> Building something on top of S-UI (a Telegram bot, monitoring, automation, ...)? Open an issue/PR to get it listed here.
+在 GitHub 中发布 `v1.5.3` 或推送同名标签后，Release 工作流会自动构建 Linux 和 Windows 安装包。
 
-## Stargazers over Time
-[![Stargazers over time](https://starchart.cc/alireza0/s-ui.svg)](https://starchart.cc/alireza0/s-ui)
+## 许可证
+
+本项目遵循 [GPL-3.0](LICENSE)。

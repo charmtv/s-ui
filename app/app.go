@@ -3,14 +3,14 @@ package app
 import (
 	"log"
 
-	"github.com/alireza0/s-ui/config"
-	"github.com/alireza0/s-ui/core"
-	"github.com/alireza0/s-ui/cronjob"
-	"github.com/alireza0/s-ui/database"
-	"github.com/alireza0/s-ui/logger"
-	"github.com/alireza0/s-ui/service"
-	"github.com/alireza0/s-ui/sub"
-	"github.com/alireza0/s-ui/web"
+	"github.com/charmtv/s-ui/config"
+	"github.com/charmtv/s-ui/core"
+	"github.com/charmtv/s-ui/cronjob"
+	"github.com/charmtv/s-ui/database"
+	"github.com/charmtv/s-ui/logger"
+	"github.com/charmtv/s-ui/service"
+	"github.com/charmtv/s-ui/sub"
+	"github.com/charmtv/s-ui/web"
 
 	"github.com/op/go-logging"
 )

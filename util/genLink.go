@@ -7,8 +7,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/alireza0/s-ui/database/model"
-	"github.com/alireza0/s-ui/util/common"
+	"github.com/charmtv/s-ui/database/model"
+	"github.com/charmtv/s-ui/util/common"
 )
 
 var InboundTypeWithLink = []string{"socks", "http", "mixed", "shadowsocks", "naive", "hysteria", "hysteria2", "anytls", "tuic", "vless", "trojan", "vmess"}
@@ -170,11 +170,7 @@ func shadowsocksLink(
 		userPass = append(userPass, inbPass)
 	}
 	var pass string
-	if method == "2022-blake3-aes-128-gcm" {
-		pass, _ = userConfig["shadowsocks16"]["password"].(string)
-	} else {
-		pass, _ = userConfig["shadowsocks"]["password"].(string)
-	}
+	pass, _ = userConfig[ShadowsocksClientConfigKey(method)]["password"].(string)
 	userPass = append(userPass, pass)
 
 	uriBase := fmt.Sprintf("ss://%s", toBase64([]byte(fmt.Sprintf("%s:%s", method, strings.Join(userPass, ":")))))
@@ -249,7 +245,7 @@ func hysteriaLink(
 			params = append(params, LinkParam{"auth", auth})
 		}
 		if tls, ok := addr["tls"].(map[string]interface{}); ok {
-			getTlsParams(&params, tls, "insecure")
+			getTlsParams(&params, tls, "hysteria")
 		}
 		if obfs, ok := inbound["obfs"].(string); ok {
 			params = append(params, LinkParam{"obfs", obfs})
@@ -297,7 +293,7 @@ func hysteria2Link(
 			params = append(params, LinkParam{"upmbps", fmt.Sprintf("%.0f", downmbps)})
 		}
 		if tls, ok := addr["tls"].(map[string]interface{}); ok {
-			getTlsParams(&params, tls, "insecure")
+			getTlsParams(&params, tls, "hysteria2")
 		}
 		if obfs, ok := inbound["obfs"].(map[string]interface{}); ok {
 			if obfsType, ok := obfs["type"].(string); ok {
@@ -343,7 +339,7 @@ func anytlsLink(
 	for _, addr := range addrs {
 		var params []LinkParam
 		if tls, ok := addr["tls"].(map[string]interface{}); ok {
-			getTlsParams(&params, tls, "insecure")
+			getTlsParams(&params, tls, "anytls")
 		}
 
 		port, _ := addr["server_port"].(float64)
@@ -373,7 +369,7 @@ func tuicLink(
 	for _, addr := range addrs {
 		var params []LinkParam
 		if tls, ok := addr["tls"].(map[string]interface{}); ok {
-			getTlsParams(&params, tls, "insecure")
+			getTlsParams(&params, tls, "tuic")
 		}
 		if congestionControl, ok := inbound["congestion_control"].(string); ok {
 			params = append(params, LinkParam{"congestion_control", congestionControl})
@@ -407,7 +403,7 @@ func vlessLink(
 		params := make([]LinkParam, len(baseParams))
 		copy(params, baseParams)
 		if tls, ok := addr["tls"].(map[string]interface{}); ok && tls["enabled"].(bool) {
-			getTlsParams(&params, tls, "allowInsecure")
+			getTlsParams(&params, tls, "vless")
 			if flow, ok := userConfig["flow"].(string); ok && isTcp {
 				params = append(params, LinkParam{"flow", flow})
 			}
@@ -433,7 +429,7 @@ func trojanLink(
 		params := make([]LinkParam, len(baseParams))
 		copy(params, baseParams)
 		if tls, ok := addr["tls"].(map[string]interface{}); ok && tls["enabled"].(bool) {
-			getTlsParams(&params, tls, "allowInsecure")
+			getTlsParams(&params, tls, "trojan")
 		}
 		port, _ := addr["server_port"].(float64)
 		uri := fmt.Sprintf("trojan://%s@%s:%.0f", password, addr["server"].(string), port)
@@ -513,7 +509,7 @@ func populateVmessTlsParams(obj map[string]interface{}, tlsConfig interface{}) {
 	if tlsMap, ok := tlsConfig.(map[string]interface{}); ok && tlsMap["enabled"].(bool) {
 		obj["tls"] = "tls"
 		var tlsParams []LinkParam
-		getTlsParams(&tlsParams, tlsMap, "allowInsecure")
+		getTlsParams(&tlsParams, tlsMap, "vmess")
 		for _, p := range tlsParams {
 			switch p.Key {
 			case "security":
@@ -603,7 +599,7 @@ func getTransportParams(t interface{}) []LinkParam {
 	return params
 }
 
-func getTlsParams(params *[]LinkParam, tls map[string]interface{}, insecureKey string) {
+func getTlsParams(params *[]LinkParam, tls map[string]interface{}, protocol string) {
 	if reality, ok := tls["reality"].(map[string]interface{}); ok && reality["enabled"].(bool) {
 		*params = append(*params, LinkParam{"security", "reality"})
 		if pbk, ok := reality["public_key"].(string); ok {
@@ -615,10 +611,10 @@ func getTlsParams(params *[]LinkParam, tls map[string]interface{}, insecureKey s
 	} else {
 		*params = append(*params, LinkParam{"security", "tls"})
 		if insecure, ok := tls["insecure"].(bool); ok && insecure {
-			*params = append(*params, LinkParam{insecureKey, "1"})
+			*params = append(*params, LinkParam{insecureKeyFor(protocol), "1"})
 		}
 		if pin, ok := tls["pinSHA256"].(string); ok && pin != "" {
-			*params = append(*params, LinkParam{"pcs", pin})
+			*params = append(*params, LinkParam{pcsKeyFor(protocol), pin})
 		}
 		if disableSni, ok := tls["disable_sni"].(bool); ok && disableSni {
 			*params = append(*params, LinkParam{"disable_sni", "1"})
@@ -639,4 +635,20 @@ func getTlsParams(params *[]LinkParam, tls map[string]interface{}, insecureKey s
 		}
 		*params = append(*params, LinkParam{"alpn", strings.Join(alpnList, ",")})
 	}
+}
+
+func insecureKeyFor(protocol string) string {
+	switch protocol {
+	case "vless", "trojan", "vmess":
+		return "allowInsecure"
+	}
+	return "insecure"
+}
+
+func pcsKeyFor(protocol string) string {
+	switch protocol {
+	case "hysteria", "hysteria2":
+		return "pinSHA256"
+	}
+	return "pcs"
 }

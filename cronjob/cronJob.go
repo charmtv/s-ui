@@ -3,7 +3,7 @@ package cronjob
 import (
 	"time"
 
-	"github.com/alireza0/s-ui/logger"
+	"github.com/charmtv/s-ui/logger"
 
 	"github.com/robfig/cron/v3"
 )

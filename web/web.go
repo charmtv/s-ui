@@ -13,12 +13,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/alireza0/s-ui/api"
-	"github.com/alireza0/s-ui/config"
-	"github.com/alireza0/s-ui/logger"
-	"github.com/alireza0/s-ui/middleware"
-	"github.com/alireza0/s-ui/network"
-	"github.com/alireza0/s-ui/service"
+	"github.com/charmtv/s-ui/api"
+	"github.com/charmtv/s-ui/config"
+	"github.com/charmtv/s-ui/logger"
+	"github.com/charmtv/s-ui/middleware"
+	"github.com/charmtv/s-ui/network"
+	"github.com/charmtv/s-ui/service"
 
 	"github.com/gin-contrib/gzip"
 	"github.com/gin-contrib/sessions"

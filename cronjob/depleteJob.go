@@ -1,9 +1,9 @@
 package cronjob
 
 import (
-	"github.com/alireza0/s-ui/database"
-	"github.com/alireza0/s-ui/logger"
-	"github.com/alireza0/s-ui/service"
+	"github.com/charmtv/s-ui/database"
+	"github.com/charmtv/s-ui/logger"
+	"github.com/charmtv/s-ui/service"
 )
 
 type DepleteJob struct {
@@ -22,9 +22,9 @@ func (s *DepleteJob) Run() {
 		return
 	}
 	if len(inboundIds) > 0 {
-		err := s.InboundService.RestartInbounds(database.GetDB(), inboundIds)
+		err := s.InboundService.UpdateInboundsUsers(database.GetDB(), inboundIds)
 		if err != nil {
-			logger.Error("unable to restart inbounds: ", err)
+			logger.Error("unable to update inbound users: ", err)
 		}
 	}
 }

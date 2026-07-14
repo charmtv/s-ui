@@ -1,8 +1,8 @@
 @echo off
+chcp 65001 >nul
 setlocal enabledelayedexpansion
 
-REM S-UI Windows Control Script
-REM This script provides a menu-driven interface for managing S-UI on Windows
+REM S-UI Windows 管理脚本
 
 cd /d "%~dp0"
 set "SERVICE_NAME=s-ui"
@@ -12,27 +12,27 @@ if "%INSTALL_DIR%"=="" set "INSTALL_DIR=C:\Program Files\s-ui"
 :menu
 cls
 echo ========================================
-echo S-UI Windows Control Panel
+echo S-UI Windows 管理面板
 echo ========================================
 echo.
-echo Current directory: %INSTALL_DIR%
+echo 安装目录：%INSTALL_DIR%
 echo.
-echo 1. Start S-UI Service
-echo 2. Stop S-UI Service
-echo 3. Restart S-UI Service
-echo 4. Check Service Status
-echo 5. View Service Logs
-echo 6. Open Panel in Browser
-echo 7. Run S-UI Manually
-echo 8. Install/Uninstall Service
-echo 9. Open Installation Directory
-echo 10. Show Configuration
-echo 11. Show Access URLs
-echo 0. Exit
+echo 1. 启动 S-UI 服务
+echo 2. 停止 S-UI 服务
+echo 3. 重启 S-UI 服务
+echo 4. 查看服务状态
+echo 5. 查看服务日志
+echo 6. 在浏览器中打开面板
+echo 7. 手动运行 S-UI
+echo 8. 安装或卸载服务
+echo 9. 打开安装目录
+echo 10. 查看配置
+echo 11. 查看访问地址
+echo 0. 退出
 echo.
 echo ========================================
 
-set /p choice="Please select an option [0-11]: "
+set /p choice="请选择 [0-11]："
 
 if "%choice%"=="1" goto start_service
 if "%choice%"=="2" goto stop_service
@@ -49,79 +49,79 @@ if "%choice%"=="0" goto exit
 goto invalid_choice
 
 :start_service
-echo Starting S-UI service...
+echo 正在启动 S-UI 服务...
 net start %SERVICE_NAME%
 if %errorLevel% equ 0 (
-    echo Service started successfully!
+    echo 服务启动成功！
 ) else (
-    echo Failed to start service. Error code: %errorLevel%
+    echo 服务启动失败，错误代码：%errorLevel%
 )
 pause
 goto menu
 
 :stop_service
-echo Stopping S-UI service...
+echo 正在停止 S-UI 服务...
 net stop %SERVICE_NAME%
 if %errorLevel% equ 0 (
-    echo Service stopped successfully!
+    echo 服务停止成功！
 ) else (
-    echo Failed to stop service. Error code: %errorLevel%
+    echo 服务停止失败，错误代码：%errorLevel%
 )
 pause
 goto menu
 
 :restart_service
-echo Restarting S-UI service...
+echo 正在重启 S-UI 服务...
 net stop %SERVICE_NAME% >nul 2>&1
 timeout /t 2 /nobreak >nul
 net start %SERVICE_NAME%
 if %errorLevel% equ 0 (
-    echo Service restarted successfully!
+    echo 服务重启成功！
 ) else (
-    echo Failed to restart service. Error code: %errorLevel%
+    echo 服务重启失败，错误代码：%errorLevel%
 )
 pause
 goto menu
 
 :check_status
-echo Checking S-UI service status...
+echo 正在检查 S-UI 服务状态...
 sc query %SERVICE_NAME%
 echo.
-echo Service status details:
+echo 服务状态详情：
 for /f "tokens=3 delims=: " %%i in ('sc query %SERVICE_NAME% ^| find "STATE"') do (
-    echo Current state: %%i
+    echo 当前状态：%%i
 )
 pause
 goto menu
 
 :view_logs
-echo Opening S-UI logs...
+echo 正在打开 S-UI 日志目录...
 if exist "%INSTALL_DIR%\logs" (
     start "" "%INSTALL_DIR%\logs"
 ) else (
-    echo Logs directory not found: %INSTALL_DIR%\logs
+    echo 未找到日志目录：%INSTALL_DIR%\logs
 )
 pause
 goto menu
 
 :open_panel
-echo Opening S-UI panel in browser...
+echo 正在浏览器中打开 S-UI 面板...
 start http://localhost:2095
-echo Panel opened in default browser.
+echo 已使用默认浏览器打开面板。
 pause
 goto menu
 
 :run_manual
-echo Running S-UI manually...
+echo 正在手动运行 S-UI...
 if exist "%INSTALL_DIR%\sui.exe" (
     cd /d "%INSTALL_DIR%"
-    echo Starting S-UI in current window...
-    echo Press Ctrl+C to stop
+    echo S-UI 将在当前窗口运行...
+    echo 按 Ctrl+C 停止
     echo.
     sui.exe
 ) else (
-    echo S-UI executable not found: %INSTALL_DIR%\sui.exe
-    echo Please run the installer first.
+    echo 未找到 S-UI 程序：%INSTALL_DIR%\sui.exe
+    echo 请先运行安装程序。
 )
 pause
 goto menu
@@ -129,14 +129,14 @@ goto menu
 :service_management
 cls
 echo ========================================
-echo Service Management
+echo Windows 服务管理
 echo ========================================
 echo.
-echo 1. Install Windows Service
-echo 2. Uninstall Windows Service
-echo 3. Back to Main Menu
+echo 1. 安装 Windows 服务
+echo 2. 卸载 Windows 服务
+echo 3. 返回主菜单
 echo.
-set /p service_choice="Select option [1-3]: "
+set /p service_choice="请选择 [1-3]："
 
 if "%service_choice%"=="1" goto install_service
 if "%service_choice%"=="2" goto uninstall_service
@@ -144,46 +144,46 @@ if "%service_choice%"=="3" goto menu
 goto invalid_choice
 
 :install_service
-echo Installing Windows Service...
+echo 正在安装 Windows 服务...
 if exist "%INSTALL_DIR%\s-ui-service.exe" (
     cd /d "%INSTALL_DIR%"
     s-ui-service.exe install
     if %errorLevel% equ 0 (
-        echo Service installed successfully!
-        echo Starting service...
+        echo 服务安装成功！
+        echo 正在启动服务...
         net start %SERVICE_NAME%
     ) else (
-        echo Failed to install service. Error code: %errorLevel%
+        echo 服务安装失败，错误代码：%errorLevel%
     )
 ) else (
-    echo Service wrapper not found. Please run the installer first.
+    echo 未找到服务包装程序，请先运行安装程序。
 )
 pause
 goto service_management
 
 :uninstall_service
-echo Uninstalling Windows Service...
+echo 正在卸载 Windows 服务...
 if exist "%INSTALL_DIR%\s-ui-service.exe" (
     cd /d "%INSTALL_DIR%"
     net stop %SERVICE_NAME% >nul 2>&1
     s-ui-service.exe uninstall
     if %errorLevel% equ 0 (
-        echo Service uninstalled successfully!
+        echo 服务卸载成功！
     ) else (
-        echo Failed to uninstall service. Error code: %errorLevel%
+        echo 服务卸载失败，错误代码：%errorLevel%
     )
 ) else (
-    echo Service wrapper not found.
+    echo 未找到服务包装程序。
 )
 pause
 goto service_management
 
 :open_directory
-echo Opening installation directory...
+echo 正在打开安装目录...
 if exist "%INSTALL_DIR%" (
     start "" "%INSTALL_DIR%"
 ) else (
-    echo Installation directory not found: %INSTALL_DIR%
+    echo 未找到安装目录：%INSTALL_DIR%
 )
 pause
 goto menu
@@ -191,17 +191,17 @@ goto menu
 :show_config
 echo.
 echo ========================================
-echo S-UI Configuration
+echo S-UI 配置
 echo ========================================
 if exist "%INSTALL_DIR%\sui.exe" (
     cd /d "%INSTALL_DIR%"
-    echo Current settings:
+    echo 当前设置：
     sui.exe setting -show
     echo.
-    echo Admin credentials:
+    echo 管理员信息：
     sui.exe admin -show
 ) else (
-    echo S-UI executable not found. Please run the installer first.
+    echo 未找到 S-UI 程序，请先运行安装程序。
 )
 pause
 goto menu
@@ -209,29 +209,29 @@ goto menu
 :show_urls
 echo.
 echo ========================================
-echo Access URLs
+echo 访问地址
 echo ========================================
 echo.
-echo Local access:
-echo   Panel: http://localhost:2095
-echo   Subscription: http://localhost:2096
+echo 本机访问：
+echo   面板：http://localhost:2095
+echo   订阅：http://localhost:2096
 echo.
-echo Network access:
+echo 局域网访问：
 for /f "tokens=2 delims=:" %%i in ('ipconfig ^| findstr /i "IPv4"') do (
     set "ip=%%i"
     set "ip=!ip: =!"
-    echo   Panel: http://!ip!:2095
-    echo   Subscription: http://!ip!:2096
+    echo   面板：http://!ip!:2095
+    echo   订阅：http://!ip!:2096
 )
 echo.
 pause
 goto menu
 
 :invalid_choice
-echo Invalid choice. Please select a valid option.
+echo 无效选项，请重新选择。
 pause
 goto menu
 
 :exit
-echo Thank you for using S-UI Windows Control Panel!
+echo 感谢使用 S-UI Windows 管理面板！
 exit /b 0

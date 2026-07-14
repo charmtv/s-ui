@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/alireza0/s-ui/logger"
-	"github.com/alireza0/s-ui/util"
+	"github.com/charmtv/s-ui/logger"
+	"github.com/charmtv/s-ui/util"
 )
 
 type Link struct {

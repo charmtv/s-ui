@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/alireza0/s-ui/logger"
-	"github.com/alireza0/s-ui/util/common"
+	"github.com/charmtv/s-ui/logger"
+	"github.com/charmtv/s-ui/util/common"
 )
 
 func GetExternalLink(url string) string {

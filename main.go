@@ -5,9 +5,10 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	_ "time/tzdata"
 
-	"github.com/alireza0/s-ui/app"
-	"github.com/alireza0/s-ui/cmd"
+	"github.com/charmtv/s-ui/app"
+	"github.com/charmtv/s-ui/cmd"
 )
 
 func runApp() {

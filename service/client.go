@@ -6,11 +6,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/alireza0/s-ui/database"
-	"github.com/alireza0/s-ui/database/model"
-	"github.com/alireza0/s-ui/logger"
-	"github.com/alireza0/s-ui/util"
-	"github.com/alireza0/s-ui/util/common"
+	"github.com/charmtv/s-ui/database"
+	"github.com/charmtv/s-ui/database/model"
+	"github.com/charmtv/s-ui/logger"
+	"github.com/charmtv/s-ui/util"
+	"github.com/charmtv/s-ui/util/common"
 
 	"gorm.io/gorm"
 )

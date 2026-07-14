@@ -6,10 +6,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/alireza0/s-ui/database"
-	"github.com/alireza0/s-ui/database/model"
-	"github.com/alireza0/s-ui/service"
-	"github.com/alireza0/s-ui/util"
+	"github.com/charmtv/s-ui/database"
+	"github.com/charmtv/s-ui/database/model"
+	"github.com/charmtv/s-ui/service"
+	"github.com/charmtv/s-ui/util"
 )
 
 type SubService struct {

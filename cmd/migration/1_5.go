@@ -3,7 +3,7 @@ package migration
 import (
 	"encoding/json"
 
-	"github.com/alireza0/s-ui/util"
+	"github.com/charmtv/s-ui/util"
 
 	"gorm.io/gorm"
 )

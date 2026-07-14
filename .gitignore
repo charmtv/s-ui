@@ -8,10 +8,10 @@ sui
 web/html
 main
 tmp
+work/
+outputs/
 .sync*
 *.tar.gz
-frontend/
-
 # local env files
 .env.local
 .env.*.local

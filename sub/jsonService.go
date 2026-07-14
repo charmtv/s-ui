@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/alireza0/s-ui/database"
-	"github.com/alireza0/s-ui/database/model"
-	"github.com/alireza0/s-ui/service"
-	"github.com/alireza0/s-ui/util"
+	"github.com/charmtv/s-ui/database"
+	"github.com/charmtv/s-ui/database/model"
+	"github.com/charmtv/s-ui/service"
+	"github.com/charmtv/s-ui/util"
 )
 
 const defaultJson = `
@@ -140,11 +140,7 @@ func (j *JsonService) getOutbounds(clientConfig json.RawMessage, inbounds []*mod
 				userPass = append(userPass, inbPass)
 			}
 			var pass string
-			if method == "2022-blake3-aes-128-gcm" {
-				pass, _ = configs["shadowsocks16"].(map[string]interface{})["password"].(string)
-			} else {
-				pass, _ = configs["shadowsocks"].(map[string]interface{})["password"].(string)
-			}
+			pass, _ = configs[util.ShadowsocksClientConfigKey(method)].(map[string]interface{})["password"].(string)
 			userPass = append(userPass, pass)
 			outbound["password"] = strings.Join(userPass, ":")
 		} else { // Other protocols

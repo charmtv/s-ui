@@ -1,7 +1,7 @@
 ---
 services:
   s-ui:
-    image: alireza7/s-ui
+    image: ghcr.io/charmtv/s-ui:latest
     container_name: s-ui
     hostname: "s-ui"
     volumes:
@@ -19,4 +19,3 @@ services:
 networks:
   s-ui:
     driver: bridge
-  

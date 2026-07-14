@@ -6,8 +6,8 @@ import (
 	"os"
 	"runtime/debug"
 
-	"github.com/alireza0/s-ui/cmd/migration"
-	"github.com/alireza0/s-ui/config"
+	"github.com/charmtv/s-ui/cmd/migration"
+	"github.com/charmtv/s-ui/config"
 )
 
 func ParseCmd() {

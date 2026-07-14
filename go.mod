@@ -1,4 +1,4 @@
-module github.com/alireza0/s-ui
+module github.com/charmtv/s-ui
 
 go 1.26.4
 

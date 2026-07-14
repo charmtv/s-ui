@@ -1,23 +1,29 @@
-# Windows Files
+# Windows 使用说明
 
-This directory contains all Windows-specific files for S-UI.
+## 安装
 
-## Available Files:
+1. 下载并解压 Windows 发布包。
+2. 右键以管理员身份运行 `install-windows.bat`。
+3. 使用 `s-ui-windows.bat` 管理服务。
 
-- **s-ui-windows.xml**: Windows Service configuration
-- **install-windows.bat**: Installation script
-- **s-ui-windows.bat**: Control panel
-- **uninstall-windows.bat**: Uninstallation script
-- **build-windows.bat**: Simple build script for CMD
-- **build-windows.ps1**: Advanced build script for PowerShell
+## 卸载
 
-## Usage:
+以管理员身份运行：
 
-To install S-UI on Windows:
-1. Run `install-windows.bat` as Administrator
-2. Follow the installation wizard
-3. Use `s-ui-windows.bat` for management
+```bat
+uninstall-windows.bat
+```
 
-To build from source:
-- With CMD: `build-windows.bat`
-- With PowerShell: `.\build-windows.ps1`
+## 本地构建
+
+CMD：
+
+```bat
+build-windows.bat
+```
+
+PowerShell：
+
+```powershell
+.\build-windows.ps1
+```

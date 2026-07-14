@@ -6,11 +6,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/alireza0/s-ui/core"
-	"github.com/alireza0/s-ui/database"
-	"github.com/alireza0/s-ui/database/model"
-	"github.com/alireza0/s-ui/logger"
-	"github.com/alireza0/s-ui/util/common"
+	"github.com/charmtv/s-ui/core"
+	"github.com/charmtv/s-ui/database"
+	"github.com/charmtv/s-ui/database/model"
+	"github.com/charmtv/s-ui/logger"
+	"github.com/charmtv/s-ui/util/common"
 )
 
 var (
@@ -209,7 +209,7 @@ func (s *ConfigService) Save(obj string, act string, data json.RawMessage, initU
 		inboundIds, err = s.ClientService.Save(tx, act, data, hostname)
 		if err == nil && len(inboundIds) > 0 {
 			objs = append(objs, "inbounds")
-			err = s.InboundService.RestartInbounds(tx, inboundIds)
+			err = s.InboundService.UpdateInboundsUsers(tx, inboundIds)
 			if err != nil {
 				return nil, common.NewErrorf("failed to update users for inbounds: %v", err)
 			}

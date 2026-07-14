@@ -1,6 +1,14 @@
 package core
 
 import (
+	suiAnytls "github.com/charmtv/s-ui/core/protocol/anytls"
+	suiHysteria "github.com/charmtv/s-ui/core/protocol/hysteria"
+	suiHysteria2 "github.com/charmtv/s-ui/core/protocol/hysteria2"
+	suiTrojan "github.com/charmtv/s-ui/core/protocol/trojan"
+	suiTuic "github.com/charmtv/s-ui/core/protocol/tuic"
+	suiVless "github.com/charmtv/s-ui/core/protocol/vless"
+	suiVmess "github.com/charmtv/s-ui/core/protocol/vmess"
+
 	"github.com/sagernet/sing-box/adapter/endpoint"
 	"github.com/sagernet/sing-box/adapter/inbound"
 	"github.com/sagernet/sing-box/adapter/outbound"
@@ -54,16 +62,16 @@ func InboundRegistry() *inbound.Registry {
 	mixed.RegisterInbound(registry)
 
 	shadowsocks.RegisterInbound(registry)
-	vmess.RegisterInbound(registry)
-	trojan.RegisterInbound(registry)
+	suiVmess.RegisterInbound(registry)
+	suiTrojan.RegisterInbound(registry)
 	naive.RegisterInbound(registry)
 	shadowtls.RegisterInbound(registry)
-	vless.RegisterInbound(registry)
-	anytls.RegisterInbound(registry)
+	suiVless.RegisterInbound(registry)
+	suiAnytls.RegisterInbound(registry)
 
-	hysteria.RegisterInbound(registry)
-	tuic.RegisterInbound(registry)
-	hysteria2.RegisterInbound(registry)
+	suiHysteria.RegisterInbound(registry)
+	suiTuic.RegisterInbound(registry)
+	suiHysteria2.RegisterInbound(registry)
 
 	return registry
 }
